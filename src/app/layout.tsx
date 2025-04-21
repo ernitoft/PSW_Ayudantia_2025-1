@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Outfit } from "next/font/google";
+import { Providers } from './providers';
+import SidebarGeneral from '../components/_shared/SidebarGeneral';
+import AuthenticatedLayout from './AuthLayouts';
 
-const outfit = Outfit({subsets: ["latin"]})
+const outfit = Outfit({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "PSW - Ayudantía",
@@ -17,9 +20,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${outfit.className} bg-gray-200`}
-      >
-        {children}
+        className={`${outfit.className} bg-gray-200`}>
+        <main>
+          <Providers>
+            <AuthenticatedLayout>
+              {children}
+            </AuthenticatedLayout>
+          </Providers>
+        </main>
       </body>
     </html>
   );
