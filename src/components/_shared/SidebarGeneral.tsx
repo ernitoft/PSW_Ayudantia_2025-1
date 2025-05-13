@@ -42,12 +42,14 @@ export default function SidebarGeneral({ children }: { children: React.ReactNode
           </SidebarHeader>
 
           <SidebarMenu className="px-2 space-y-1">
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Home />
-                <span>Inicio</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <Link href="/" >
+              <SidebarMenuItem>
+                <SidebarMenuButton className='hover:cursor-pointer'>
+                  <Home />
+                  <span>Inicio</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </Link>
 
             <SidebarMenuItem>
               <SidebarMenuButton>
@@ -64,10 +66,12 @@ export default function SidebarGeneral({ children }: { children: React.ReactNode
             </SidebarMenuItem>
 
             <SidebarMenuItem>
-              <SidebarMenuButton>
-                <MessageCircle />
-                <span>Mensajes</span>
-              </SidebarMenuButton>
+              <Link href="/messages">
+                <SidebarMenuButton className='hover:cursor-pointer'>
+                  <MessageCircle />
+                  <span>Mensajes</span>
+                </SidebarMenuButton>
+              </Link>
             </SidebarMenuItem>
 
             <SidebarMenuItem>
@@ -76,10 +80,10 @@ export default function SidebarGeneral({ children }: { children: React.ReactNode
                 <span>Notificaciones</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            
+
             <SidebarMenuItem>
               <Link href="/posts/create">
-                <SidebarMenuButton>
+                <SidebarMenuButton className='hover:cursor-pointer'>
                   <PlusSquare />
                   <span>Crear</span>
                 </SidebarMenuButton>

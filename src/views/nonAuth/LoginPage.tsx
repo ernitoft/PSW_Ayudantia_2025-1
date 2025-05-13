@@ -5,10 +5,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { AuthContext } from "@/context/auth/AuthContext";
 import { ApiBackend } from "@/data/axios";
-import { User } from "@/interfaces/User";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Eye, EyeOff } from "lucide-react";
+import { User } from "@/interfaces/User";
 
 export const LoginPage = () => {
     const form = useForm({
@@ -21,8 +21,9 @@ export const LoginPage = () => {
     const [errors, setErrors] = useState<boolean>(false);
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
     const { auth } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    
+
     const onSubmit = async (forms: any) => {
         try {
             const { data } = await ApiBackend.post<any>("/Auth/Login", forms);
@@ -90,9 +91,23 @@ export const LoginPage = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Contraseña</FormLabel>
-                                <FormControl>
-                                    <Input type="password" placeholder="********" {...field} />
-                                </FormControl>
+                                <div className="relative">
+                                    <FormControl>
+                                        <Input
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="********"
+                                            {...field}
+                                            className="pr-10"
+                                        />
+                                    </FormControl>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword((prev) => !prev)}
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                    >
+                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
+                                </div>
                                 <FormMessage />
                             </FormItem>
                         )}
