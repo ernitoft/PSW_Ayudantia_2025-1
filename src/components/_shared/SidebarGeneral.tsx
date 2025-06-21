@@ -26,9 +26,13 @@ import { Button } from '../ui/button';
 import { useContext } from 'react';
 import { AuthContext } from '@/context/auth/AuthContext';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SidebarGeneral({ children }: { children: React.ReactNode }) {
   const { logout } = useContext(AuthContext);
+  const router = useRouter();
+
+
   return (
     <SidebarProvider>
       <Sidebar
@@ -111,6 +115,13 @@ export default function SidebarGeneral({ children }: { children: React.ReactNode
                 <span>Más</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+
+            <Button onClick={() => {
+              router.push('/sub')
+            }} className='hover: cursor-pointer hover:bg-blue-800' variant={'ghost'}>
+              Suscribirse
+            </Button>
             <Button onClick={logout} className="hover:cursor-pointer hover:bg-neutral-800">
               Cerrar Sesión
             </Button>
